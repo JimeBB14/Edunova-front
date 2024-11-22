@@ -1,0 +1,51 @@
+<div class="chat-container">
+    <!-- Chat Header (Profile Picture and Question Icon) -->
+    <div class="chat-header">
+        <div class="profile-pic" (click)="toggleDropdown()"></div>
+        <div class="fa-solid fa-question"></div>
+      </div>
+      
+      <div class="dropdown" *ngIf="isDropdownVisible">
+        <div class="menu-item">
+          <i class="fas fa-user"></i> Profile
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-comments"></i> Chat
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-robot"></i> Robot Lab
+        </div>
+        <div class="menu-item">
+          <i class="fas fa-road"></i> Roadmap
+        </div>
+      </div>
+  </div>
+    <!-- Separator/Container to create space between the header and the messages -->
+    <div class="header-separator"></div>
+    <div class="header-line"></div>
+  
+    <!-- Messages Area -->
+    <div class="messages">
+      <div class="message" *ngFor="let msg of messages">
+        <div class="message-user" *ngIf="msg.sender === 'user'">
+          {{ msg.text }}
+        </div>
+        <div class="message-assistant" *ngIf="msg.sender === 'assistant'">
+          {{ msg.text }}
+        </div>
+      </div>
+    </div>
+  
+    <!-- Input Area for User Messages -->
+    <div class="input-area">
+      <textarea [(ngModel)]="userInput" placeholder="Type your message..."></textarea>
+      <div class="icons">
+        <!-- Picture Icon -->
+        <i class="fas fa-image"></i>
+  
+        <!-- Microphone Icon -->
+        <i class="fas fa-microphone"></i>
+      </div>
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  
