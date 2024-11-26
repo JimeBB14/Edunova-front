@@ -80,13 +80,99 @@
   }
   
   /* Separator between header and messages */
+/* Separator for Game or Background */
 .header-separator {
-    width: 100%; 
-    height: 300px; /* Create space between header and messages */
-    background-color: #f5f5f5; /* Light gray background for separation */
-    margin: 0; /* Remove any margin between the separator and messages */
-    padding: 0; /* Ensure no padding on the sides */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 300px; /* Dynamic height for background and game */
+  background-color: #f5f5f5; /* Default background color */
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Background Image (when game is not active) */
+.header-background {
+  background-image: url('../../assets/images/ai.png'); /* Replace with your image */
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+}
+
+/* Game Container */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%; /* Limit width */
+  max-width: 400px; /* Prevent over-expansion */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 2; /* Ensure it's above background */
+  position: absolute;
+}
+
+/* Game Question */
+.game-question {
+  font-size: 18px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Input and Button for Game */
+.game-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.game-input input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 70%;
+}
+
+.game-input button {
+  padding: 10px 15px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.game-input button:hover {
+  background-color: #3949ab;
+}
+
+/* Feedback Message */
+.game-feedback {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #4caf50; /* Green for correct feedback */
+}
+
+/* End Game Button */
+.game-end-button {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.game-end-button:hover {
+  background-color: #d32f2f;
+}
 
   /* Second separator (gray line) */
 .header-line {
@@ -188,4 +274,6 @@
     margin-right: 10px;
     color: #3f51b5;
   }
+  
+
   
