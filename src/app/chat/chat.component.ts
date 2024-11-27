@@ -23,7 +23,7 @@ export class ChatComponent {
   feedback: string | null = null;
 
   constructor(private http: HttpClient) {}
-
+/* 
   sendMessage() {
     if (this.userInput.trim().toLowerCase() === 'game') {
       this.startGame();
@@ -63,7 +63,43 @@ export class ChatComponent {
           }
         });
     }
-  }
+  } */
+    sendMessage() {
+      if (this.userInput.trim()) {
+        // Add the user's message to the chat
+        this.messages.push({ sender: 'user', text: this.userInput });
+    
+        // Save the input locally before clearing
+        const userMessage = this.userInput;
+        this.userInput = '';
+    
+        // Call the Flask API
+        this.http
+          .post<{ response: string }>('http://localhost:5000/api/prompt', {
+            prompt: userMessage, // Pass the user's input as "prompt"
+          })
+          .subscribe({
+            next: (response) => {
+              // Add the assistant's response to the chat
+              const assistantMessage = response.response;
+              this.messages.push({ sender: 'assistant', text: assistantMessage });
+    
+              // Optional: Invoke text-to-speech for the assistant's response
+              this.textToSpeech(assistantMessage);
+            },
+            error: (err) => {
+              // Handle errors
+              const errorMessage =
+                'Sorry, there was an error processing your request.';
+              this.messages.push({ sender: 'assistant', text: errorMessage });
+    
+              // Optional: Invoke text-to-speech for the error message
+              this.textToSpeech(errorMessage);
+            },
+          });
+      }
+    }
+    
 
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
